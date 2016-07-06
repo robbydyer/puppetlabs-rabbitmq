@@ -22,7 +22,7 @@ Puppet::Type.type(:rabbitmq_plugin).provide(:rabbitmqplugins, :parent => Puppet:
   defaultfor :feature => :posix
 
   def self.instances
-    self.run_with_retries {
+    self.run_with_retries(timeout=resource[:timeout]) {
       rabbitmqplugins('list', '-E', '-m')
     }.split(/\n/).map do |line|
       if line =~ /^(\S+)$/
@@ -46,7 +46,7 @@ Puppet::Type.type(:rabbitmq_plugin).provide(:rabbitmqplugins, :parent => Puppet:
   end
 
   def exists?
-    self.class.run_with_retries {
+    self.class.run_with_retries(timeout=resource[:timeout]) {
       rabbitmqplugins('list', '-E', '-m')
     }.split(/\n/).detect do |line|
       line.match(/^#{resource[:name]}$/)
