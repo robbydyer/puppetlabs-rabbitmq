@@ -104,6 +104,9 @@ class rabbitmq(
   }
   validate_string($node_ip_address)
   validate_absolute_path($plugin_dir)
+  if ! is_integer($plugins_timeout) {
+    validate_re($plugins_timeout, '\d+')
+  }
   if ! is_integer($port) {
     validate_re($port, ['\d+','UNSET'])
   }
