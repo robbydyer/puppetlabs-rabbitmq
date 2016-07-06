@@ -28,4 +28,16 @@ Puppet::Type.newtype(:rabbitmq_plugin) do
     end
   end
 
+  newparam(:timeout) do
+    desc "Sets the timeout for the rabbitmqplugins command"
+    defaultto 10
+    munge do |value|
+      if value.is_a?(String) and value =~ /^[0-9]+$/
+        Integer(value)
+      else
+        value
+      end
+    end
+  end
+
 end
