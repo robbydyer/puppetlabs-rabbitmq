@@ -28,6 +28,7 @@ class rabbitmq(
   $repos_ensure               = $rabbitmq::params::repos_ensure,
   $manage_repos               = $rabbitmq::params::manage_repos,
   $plugin_dir                 = $rabbitmq::params::plugin_dir,
+  $plugins_timeout            = $rabbitmq::params::plugins_timeout,
   $rabbitmq_user              = $rabbitmq::params::rabbitmq_user,
   $rabbitmq_group             = $rabbitmq::params::rabbitmq_group,
   $rabbitmq_home              = $rabbitmq::params::rabbitmq_home,
@@ -236,6 +237,7 @@ class rabbitmq(
       require  => Class['rabbitmq::install'],
       notify   => Class['rabbitmq::service'],
       provider => 'rabbitmqplugins',
+      timeout  => $plugins_timeout,
     }
 
     Class['::rabbitmq::service'] -> Class['::rabbitmq::install::rabbitmqadmin']
@@ -247,6 +249,7 @@ class rabbitmq(
       ensure  => present,
       require => Class['rabbitmq::install'],
       notify  => Class['rabbitmq::service'],
+      timeout  => $plugins_timeout,
     }
   }
 
@@ -255,6 +258,7 @@ class rabbitmq(
       ensure  => present,
       require => Class['rabbitmq::install'],
       notify  => Class['rabbitmq::service'],
+      timeout  => $plugins_timeout,
     }
   }
 
@@ -264,6 +268,7 @@ class rabbitmq(
       require  => Class['rabbitmq::install'],
       notify   => Class['rabbitmq::service'],
       provider => 'rabbitmqplugins',
+      timeout  => $plugins_timeout,
     }
 
     if ($admin_enable) {
@@ -272,6 +277,7 @@ class rabbitmq(
         require  => Class['rabbitmq::install'],
         notify   => Class['rabbitmq::service'],
         provider => 'rabbitmqplugins',
+        timeout  => $plugins_timeout,
       }
     }
   }

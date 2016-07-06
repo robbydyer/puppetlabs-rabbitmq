@@ -92,6 +92,7 @@ class rabbitmq::params {
   $erlang_cookie               = undef
   $interface                   = 'UNSET'
   $node_ip_address             = 'UNSET'
+  $plugins_timeout             = '10'
   $port                        = '5672'
   $tcp_keepalive               = false
   $heartbeat                   = undef
