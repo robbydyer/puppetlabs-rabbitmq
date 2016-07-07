@@ -375,6 +375,10 @@ package_provider, you must specify a local package_source.
 
 Location of RabbitMQ plugins.
 
+####`plugins_timeout`
+
+Overrides the default timeout value (10 seconds) for the rabbitmq-plugins list command
+
 ####`port`
 
 The RabbitMQ port.
